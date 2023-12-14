@@ -1,0 +1,44 @@
+﻿@model List<Web.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Importar Usuarios";
+}
+
+<h1>Importar Usuarios</h1>
+
+<p>@ViewBag.resultado</p>
+
+<form asp-action="Importar" asp-controller="Usuarios" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="fileInput">Seleccione un archivo Excel:</label>
+        <input type="file" name="archivo" class="form-control-file" id="fileInput" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Importar</button>
+</form>
+
+<hr />
+
+@if (Model != null && Model.Count > 0)
+{
+    <h2>Usuarios Importados</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario in Model)
+            {
+                <tr>
+                    <td>@usuario.Nombre</td>
+                    <td>@usuario.CorreoElectronico</td>
+                    <td>@usuario.Telefono</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
